@@ -6,7 +6,17 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         primary: colors.green
+      },
+      aspectRatio: {
+        auto: 'auto',
+        square: '1 / 1',
+        video: '16 / 9'
       }
     }
-  }
+  },
+
+  content: [
+    'docs/content/**/*.md'
+  ],
+
 }
