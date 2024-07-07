@@ -1,7 +1,11 @@
 <template>
   <div class="h-[calc(100vh-88px)] ">
     <h1>Ini Home</h1>
-    <p>{{ dataAxios }}</p>
+    <p>{{ dataAxios }} ppp</p>
+  </div>
+
+  <div class="h-screen">
+    <p>Section</p>
   </div>
 </template>
 

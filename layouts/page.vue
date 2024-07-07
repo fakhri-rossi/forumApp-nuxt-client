@@ -2,7 +2,7 @@
   <div class="light:bg-white light:text-black dark:bg-gray-900 dark:text-gray-200">
     <LoginDialog />
 
-    <header class="h-[38px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white px-8 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
+    <header class="h-[48px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white px-8 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
 
       <ul class="flex gap-5 ps-5">
         <li v-for="(menu, index) in menus" :key="index">
@@ -13,10 +13,8 @@
       <div class="flex justify-center items-center gap-5">
         <ToggleColorMode />
         <UButton @click="dialog = true">
-          <span>
-            <UIcon name="material-symbols:person" />
-            Login
-          </span>
+          <Icon name="material-symbols:person" class="w-5 h-5" />
+          Login
         </UButton>
       </div>
     </header>
@@ -32,7 +30,6 @@
 
 <script setup>
 import ToggleColorMode from '~/components/ToggleColorMode.vue';
-// import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/stores/authStores';
 
   const authStore = useAuthStore();
