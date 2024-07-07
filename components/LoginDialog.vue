@@ -1,7 +1,7 @@
 <template>
-  <div v-if="dialog" class="absolute top-0 left-0 w-full h-full bg-white/50 dark:bg-white/50 flex justify-center items-center z-10">
+  <div v-if="dialog" class="fixed top-0 left-0 w-full h-full bg-white/50 dark:bg-white/50 flex justify-center items-center z-10">
     
-    <form method="post" @submit.prevent="handleSubmit" action="http://localhost:8000/api/v1/auth/login" class="fixed top-[25%] flex flex-col justify-between gap-5 p-8 bg-emerald-600 dark:bg-gray-900 rounded-xl aspect-square w-[80%] sm:w-[320px]">
+    <form method="post" @submit.prevent="handleSubmit" action="http://localhost:8000/api/v1/auth/login" class="flex flex-col justify-between gap-5 p-8 bg-emerald-600 dark:bg-gray-900 rounded-xl aspect-square w-[80%] sm:w-[320px]">
       
       <div class="flex justify-center">
         <img src="../public/nuxt-logo.png" class="h-[3rem]" alt="">

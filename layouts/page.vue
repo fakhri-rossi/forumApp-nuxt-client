@@ -6,13 +6,13 @@
 
       <ul class="flex gap-5 ps-5">
         <li v-for="(menu, index) in menus" :key="index">
-          <NuxtLink to="menu.to">{{ menu.label }}</NuxtLink>
+          <NuxtLink :to="menu.to">{{ menu.label }}</NuxtLink>
         </li>
       </ul>
       
       <div class="flex justify-center items-center gap-5">
         <ToggleColorMode />
-        <UButton @click="dialog = true">
+        <UButton @click="toggleLogin">
           <Icon name="material-symbols:person" class="w-5 h-5" />
           Login
         </UButton>
@@ -38,15 +38,16 @@ import { useAuthStore } from '~/stores/authStores';
 
   const menus = ref([
     { label: 'Home', to:'/' },
-    // { label: 'Projects', to:'/projects' },
-    // { label: 'Contact', to:'/contact' },
+    { label: 'Projects', to:'/projects' },
+    { label: 'Contact', to:'/contact' },
   ])
   let show = ref(false);  
 
   let toggleLogin = () => {
-      show.value = true;
-      console.log(show.value);
-    }
+    dialog.value = true;
+    // authStore.errMsg.value = '';
+    // authStore.errAlert.value = false;
+  } 
 
 
 </script>
