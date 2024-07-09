@@ -1,5 +1,8 @@
 <template>
-  <LoginDialog />
+  <DialogWrapper>
+    <DialogLogin v-if="currentDialog === 'login'" />
+    <DialogRegister v-if="currentDialog === 'register'" />
+  </DialogWrapper>
 
   <header class="h-[48px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white px-8 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
 
@@ -11,6 +14,7 @@
 
     <UButton @click="console.log(token)" label="see token" />
     <UButton @click="console.log(currentUser)" label="see user" />
+    <UButton @click="console.log(currentDialog)" :label="currentDialog" />
     
     <div class="flex justify-center items-center gap-5">
       <ToggleColorMode />
@@ -20,7 +24,17 @@
         Login
       </UButton>
 
-      <ProfileDropdown v-if="authStore.currentUser" />
+      <!-- <UButton variant="ghost" v-if="authStore.currentUser">
+      </UButton> -->
+      
+      <NuxtLink to="dashboard/" class="dark:hover:text-green-400">
+        Dashboard
+      </NuxtLink>
+      
+      <UButton variant="ghost" v-if="authStore.currentUser" @click="handleLogout">
+        Logout
+      </UButton>
+
     </div>
   </header>
 </template>
@@ -29,9 +43,9 @@
   import { useAuthStore } from '~/stores/authStores';
 
   const authStore = useAuthStore();
-  const { dialog, token, currentUser } = storeToRefs(authStore);
+  const { showDialog, token, currentUser, currentDialog } = storeToRefs(authStore);
 
-  onMounted(() => {
+  onBeforeMount(() => {
     authStore.refreshUser();
   })
 
@@ -42,8 +56,17 @@
   ])
 
   const toggleLogin = () => {
-    dialog.value = true;
-  } 
+    showDialog.value = true;
+  }
+
+  const handleLogout = async () => {
+    token.value = null;
+    // useCookie('jwt').value = null;
+    authStore.setTokenValue(null, () => {
+      authStore.refreshUser();
+      showDialog.value = false;
+    })
+  }
 </script>
 
 <style>
