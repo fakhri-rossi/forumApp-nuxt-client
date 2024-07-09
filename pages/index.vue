@@ -1,7 +1,9 @@
 <template>
   <div class="h-[calc(100vh-88px)] ">
     <h1>Ini Home</h1>
-    <p>{{ dataAxios }} ppp</p>
+    <p>token: {{ token }}</p>
+    <p>Current User {{ currentUser }}</p>
+    <!-- <p>{{ dataAxios }} ppp</p> -->
   </div>
 
   <div class="h-screen">
@@ -10,22 +12,15 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-
-  // const customFetch = useNuxtApp()
-  // console.log(useNuxtApp())
-
-  let dataAxios = ref('')
-
-  onBeforeMount(async () => {
-    const res = await axios.get('http://localhost:8000/');
-    console.log(res.data);
-    // dataAxios.data = res.data.message;
-    dataAxios = res.data.message;
-  })
+  const authStore = useAuthStore();
+  const { token, currentUser } = storeToRefs(authStore);
   
   definePageMeta({
       layout: 'page'
+  })
+
+  onMounted(() => {
+    authStore.refreshUser();
   })
 
 </script>

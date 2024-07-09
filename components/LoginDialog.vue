@@ -30,7 +30,6 @@
 </template>
 
 <script setup>
-import axios from 'axios';
   const authStore = useAuthStore();
   const { dialog } = storeToRefs(authStore);
 
