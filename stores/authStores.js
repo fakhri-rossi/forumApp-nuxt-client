@@ -37,6 +37,14 @@ export const useAuthStore = defineStore('user', () => {
       getUser();
   }
 
+  const logout = () => {
+    token.value = null;
+    setTokenValue(null, () => {
+      refreshUser();
+      showDialog.value = false;
+    })
+  }
+
   return { 
     showDialog, 
     errAlert, 
@@ -49,6 +57,7 @@ export const useAuthStore = defineStore('user', () => {
     currentDialog, 
     email, 
     password,
-    setTokenValue
+    setTokenValue,
+    logout
   }
 })

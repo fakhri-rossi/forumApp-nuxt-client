@@ -4,19 +4,19 @@
     <DialogRegister v-if="currentDialog === 'register'" />
   </DialogWrapper>
 
-  <header class="h-[48px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white px-8 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
+  <header class="h-[48px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white md:px-8 px-2 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
 
-    <ul class="flex gap-5 ps-5">
+    <ul class="flex gap-2 md:gap-5 ps-5">
       <li v-for="(menu, index) in menus" :key="index">
         <NuxtLink :to="menu.to" class="dark:hover:text-green-400">{{ menu.label }}</NuxtLink>
       </li>
     </ul>
 
-    <UButton @click="console.log(token)" label="see token" />
+    <!-- <UButton @click="console.log(token)" label="see token" />
     <UButton @click="console.log(currentUser)" label="see user" />
-    <UButton @click="console.log(currentDialog)" :label="currentDialog" />
+    <UButton @click="console.log(currentDialog)" :label="currentDialog" /> -->
     
-    <div class="flex justify-center items-center gap-5">
+    <div class="flex justify-center items-center gap-2 md:gap-5">
       <ToggleColorMode />
       
       <UButton v-if="!authStore.currentUser" @click="toggleLogin">
@@ -24,16 +24,7 @@
         Login
       </UButton>
 
-      <!-- <UButton variant="ghost" v-if="authStore.currentUser">
-      </UButton> -->
-      
-      <NuxtLink to="dashboard/" class="dark:hover:text-green-400">
-        Dashboard
-      </NuxtLink>
-      
-      <UButton variant="ghost" v-if="authStore.currentUser" @click="handleLogout">
-        Logout
-      </UButton>
+      <ProfileDropdown v-if="currentUser" />
 
     </div>
   </header>
@@ -59,14 +50,6 @@
     showDialog.value = true;
   }
 
-  const handleLogout = async () => {
-    token.value = null;
-    // useCookie('jwt').value = null;
-    authStore.setTokenValue(null, () => {
-      authStore.refreshUser();
-      showDialog.value = false;
-    })
-  }
 </script>
 
 <style>
