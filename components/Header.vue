@@ -4,7 +4,7 @@
     <DialogRegister v-if="currentDialog === 'register'" />
   </DialogWrapper>
 
-  <header class="h-[48px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white md:px-8 px-2 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
+  <header class="sticky top-0 h-[48px] backdrop-blur-lg flex justify-between items-center bg-emerald-600 text-white md:px-8 px-2 dark:bg-gray-900/50 border-b border-gray-300 dark:border-gray-700 ">
 
     <ul class="flex gap-2 md:gap-5 ps-5">
       <li v-for="(menu, index) in menus" :key="index">
@@ -34,7 +34,10 @@
   import { useAuthStore } from '~/stores/authStores';
 
   const authStore = useAuthStore();
-  const { showDialog, token, currentUser, currentDialog } = storeToRefs(authStore);
+  const { token, currentUser } = storeToRefs(authStore);
+  // const {  }
+  const { currentDialog } = useAuth();
+  const { showDialog } = useDialog();
 
   onBeforeMount(() => {
     authStore.refreshUser();

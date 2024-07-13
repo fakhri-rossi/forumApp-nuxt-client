@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-  const authStore = useAuthStore();
-  const { showDialog } = storeToRefs(authStore);
+// import { useDialog } from '~/composables/dialog';
+  const { showDialog } = useDialog();
 
 
 </script>

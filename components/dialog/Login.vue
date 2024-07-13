@@ -9,16 +9,16 @@
         <p class="font-bold text-center text-xl">Login</p>
       </div>
       
-      <ErrorAlert v-if="authStore.errAlert" errTitle="Invalid" :errDesc="authStore.errMsg" />
+      <ErrorAlert v-if="errAlert" errTitle="Invalid" :errDesc="errMsg" />
       
       <div>
         <label class="text-[1rem]" for="email">Email</label>
-        <UInput  type="email" v-model="email" name="email" id="email" color="white" variant="outline" placeholder="Search..." />
+        <UInput v-model="email" type="email" name="email" id="email" color="white" variant="outline" placeholder="Search..." />
       </div>
 
       <div>
         <label class="text-[1rem]" for="password">Password</label>
-        <UInput  type="password" v-model="password" name="password" id="password" color="white" variant="outline" placeholder="Search..." />
+        <UInput v-model="password" type="password" name="password" id="password" color="white" variant="outline" placeholder="Search..." />
       </div>
       
       <div class="flex justify-between items-center">
@@ -34,19 +34,15 @@
 </template>
 
 <script setup>
-  const authStore = useAuthStore();
-  const loginStore = useLoginStore();
-  const { showDialog, currentDialog, email, password } = storeToRefs(authStore);
+  const {email, password, errMsg, errAlert, currentDialog} = useAuth();
+  const { loginUser } = useLogin();
 
   const handleSubmit = () => {
-    loginStore.loginUser({
-      email: email.value,
-      password: password.value
-    });
+    loginUser();
   }
 
   const handleCancel = () => {
-    authStore.errAlert = false;
+    // errAlert = false;
     showDialog.value = false;
   }
 

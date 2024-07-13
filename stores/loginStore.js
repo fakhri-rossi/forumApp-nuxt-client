@@ -5,22 +5,20 @@ import axios from 'axios';
 export const useLoginStore = defineStore('login', () => {
   const authStore = useAuthStore();
   const { errMsg, errAlert, showDialog } = storeToRefs(authStore);
+  const auth = useAuth();
 
   const loginUser = async (inputData) => {
     errAlert.value = false;
-
-    await axios.post('http://localhost:8000/api/v1/auth/login', {
-      email: inputData.email,
-      password: inputData.password })
-
+    
+    useMyFetch('/api/v1/auth/login', {method: 'POST', body: {
+      email: auth.email.value,
+      password: auth.password.value
+    }})
       .then((res) => {
-        // useCookie('jwt').value = res.data.jwt;
-        authStore.setTokenValue(res.data.jwt, () => {
-          authStore.refreshUser();
-        })
-        
-        inputData.email = '';
-        inputData.password = '';
+        console.log(res);
+        console.log('Respon berhasil');
+        auth.email.value = '';
+        auth.password.value = '';
         showDialog.value = false;
       })
 
@@ -42,11 +40,12 @@ export const useLoginStore = defineStore('login', () => {
           break;
         }
         console.log('eror cuy');
-        console.log('error then:', err);
+        console.log(err);
+        console.log(Object.keys(err));
+        console.log(Object.values(err));
 
       });
     }
-
   return {
     loginUser
   }

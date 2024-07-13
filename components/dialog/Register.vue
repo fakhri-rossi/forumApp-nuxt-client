@@ -9,7 +9,7 @@
         <p class="font-bold text-center text-xl">Register</p>
       </div>
       
-      <ErrorAlert v-if="authStore.errAlert" errTitle="Invalid" :errDesc="authStore.errMsg" />
+      <ErrorAlert v-if="errAlert" errTitle="Invalid" :errDesc="errMsg" />
       
       <div>
         <label class="text-[1rem]" for="email">Email</label>
@@ -39,8 +39,7 @@
 </template>
 
 <script setup>
-  const authStore = useAuthStore();
-  const { showDialog, email, password, currentDialog } = storeToRefs(authStore);
+  const { showDialog, email, password, currentDialog, errAlert, errMsg } = useAuth();
   const confirmPassword = ref('');
 
   const handleSubmit = () => {
