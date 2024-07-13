@@ -21,9 +21,7 @@ import axios from 'axios';
   const users = ref();
 
   onMounted(async () => {
-    // const res = await axios.get('http://127.0.0.1:8000/api/v1/user')
-    const result = await $fetch('/api/users')
-    // const result = await $fetch('http://127.0.0.1:8000/api/v1/user')
+    const result = await $fetch('/api/users', {method: 'GET'});
     users.value = result;
   })
 

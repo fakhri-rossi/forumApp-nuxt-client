@@ -35,10 +35,12 @@
 
 <script setup>
   const {email, password, errMsg, errAlert, currentDialog} = useAuth();
-  const { loginUser } = useLogin();
+  // const { lo } = useLogin();
+  // useLogin().
+  const { showDialog } = useDialog();
 
   const handleSubmit = () => {
-    loginUser();
+    useLogin().loginUser();
   }
 
   const handleCancel = () => {
